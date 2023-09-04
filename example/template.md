@@ -1,8 +1,3 @@
-### Betreff
-Rechnungsbericht Versammlung (#month #year)
-
-### Body
-
 Hallo John
 
 Im Anhang der Rechnungsbericht für #month.

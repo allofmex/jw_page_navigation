@@ -97,15 +97,17 @@ class PageNavigator:
         mailerStartPageCond = ExpCond.presence_of_element_located((By.XPATH, '//div[contains(@class,"o365cs-nav-topItem")]'))
         ## wait for login prompt or any of start-page items if already logged in
         inputOrTitle = loginWait.until(ExpCond.any_of(
-            ExpCond.element_to_be_clickable((By.XPATH, '//input[@autocomplete="username"]')),
+            # hub is username, mailer is userNameInput
+            ExpCond.element_to_be_clickable((By.XPATH, '//input[@autocomplete="username" or @id="userNameInput"]')),
             hubStartPageCond,
             mailerStartPageCond));
 
         if inputOrTitle.tag_name == "input":
             if self.userName is not None:
-                usernameInput = self.driver.find_element(By.ID, "username")
+                usernameInput = self.driver.find_element(By.XPATH, '//input[@autocomplete="username" or @id="userNameInput"]')
                 usernameInput.send_keys(self.userName)
-                self.driver.find_element(By.ID, "submit-button").click()
+                # hub is submit-button, mailer is nextButton
+                self.driver.find_element(By.XPATH, '//*[@id="submit-button" or @id="nextButton"]').click()
             print("##### Please login now! #####")
             loginWait.until(hubStartPageCond)
             print("Login complete")
