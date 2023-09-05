@@ -26,11 +26,6 @@ class MailingHelper(PageNavigator):
         bodyEditor = self.navWait.until(ExpCond.presence_of_element_located((By.XPATH, '//div[contains(@autoid,"_z_n")]/child::div')))
         self.driver.execute_script(f"arguments[0].innerHTML = '{html}';", bodyEditor)
         bodyEditor.send_keys(' ')
-        
-        # String myText = (String) Toolkit.getDefaultToolkit().getSystemClipboard().getData(DataFlavor.stringFlavor); // extracting the text that was copied to the clipboard
-        # input.sendKeys(myText);//passing the extracted text to the text field
-        # input.send_keys("My text")
-        
 
     async def setSubject(self, subject: str):
         subjectInput = self.navWait.until(ExpCond.presence_of_element_located((By.XPATH, '//input[contains(@autoid,"_mcp_c")]')))
@@ -39,3 +34,9 @@ class MailingHelper(PageNavigator):
     async def setTo(self, receiver: List[str]):
         accInput = self.navWait.until(ExpCond.presence_of_element_located((By.XPATH, '//input[contains(@autoid,"_fp_5")]')))
         accInput.send_keys('; '.join(receiver))
+        # just click somewhere to make page accept pasted value
+        self.navWait.until(ExpCond.presence_of_element_located((By.XPATH, '//input[contains(@autoid,"_fp_5")]'))).click()
+
+    async def addAttachment(self, absFilePath: str) -> None:
+        fileInput = self.navWait.until(ExpCond.presence_of_element_located((By.XPATH, '//input[contains(@type,"file")]')))
+        fileInput.send_keys(absFilePath);
