@@ -14,11 +14,16 @@ from selenium.webdriver.common.by import By
 class PageNavigator:
 
     URL = 'https://jw.org/de'
+    userName = None
+    password = None
 
     def __init__(self, firefoxProfilePath: str, downloadDir: str = None):
         options = Options()
         snapFirefoxBinary = getoutput("find /snap/firefox -name firefox").split("\n")[-1]
+        geckodriverBinary = getoutput("find /snap/firefox -name geckodriver").split("\n")[-1]
 
+        print(f"Binary: {snapFirefoxBinary}")
+        print(f"Gecko binary {geckodriverBinary}")
         #if "No such file or directory" not in snapFirefoxBinary:
         options.binary_location = snapFirefoxBinary
         #else:
@@ -49,7 +54,7 @@ class PageNavigator:
                                    downloadDir+"/printed.pdf")
         options.set_preference("browser.startup.page", 0)
         self.driver = webdriver.Firefox(
-            service = Service(executable_path = getoutput("find /snap/firefox -name geckodriver").split("\n")[-1]),
+            service = Service(executable_path = geckodriverBinary),
             options = options)
 
         self.navWait = WebDriverWait(self.driver, 20)
