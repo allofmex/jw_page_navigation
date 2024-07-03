@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 from subprocess import getoutput
 import asyncio
-from os import makedirs, getenv
+from os import makedirs
 
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as ExpCond
@@ -16,21 +16,22 @@ class PageNavigator:
     URL = 'https://jw.org/de'
     userName = None
     password = None
+    driver = None
 
     def __init__(self, firefoxProfilePath: str, downloadDir: str = None):
         options = Options()
         snapFirefoxBinary = getoutput("find /snap/firefox -name firefox").split("\n")[-1]
         geckodriverBinary = getoutput("find /snap/firefox -name geckodriver").split("\n")[-1]
-
-        print(f"Binary: {snapFirefoxBinary}")
-        print(f"Gecko binary {geckodriverBinary}")
-        #if "No such file or directory" not in snapFirefoxBinary:
-        options.binary_location = snapFirefoxBinary
-        #else:
-        #    options.binary_location = "/usr/bin/firefox"
+        if "No such file or directory" not in snapFirefoxBinary:
+            print(f"Using snap Firefox. Binary: {snapFirefoxBinary}, Gecko binary {geckodriverBinary}")
+            options.binary_location = snapFirefoxBinary
+        else:
+            # options.binary_location = "/usr/bin/firefox"
+            geckodriverBinary = None
+            print("Using regular (non snap) Firefox")
         # options.add_argument("--kiosk") 
-
         print("firefoxProfilePath "+firefoxProfilePath)
+        print("In case of firefox startup problems: Delete profile dir. Run 2 times, first start on new profile may fail.")
         makedirs(firefoxProfilePath, exist_ok=True, mode=0o700)
         ## webdriver.FirefoxProfile(firefoxProfilePath) is ignoring profile path on some snap firefox versions, use -profile arg instead
         options.add_argument("-profile")
@@ -56,7 +57,6 @@ class PageNavigator:
         self.driver = webdriver.Firefox(
             service = Service(executable_path = geckodriverBinary),
             options = options)
-
         self.navWait = WebDriverWait(self.driver, 20)
 
     def setCredentials(self, userName, password):

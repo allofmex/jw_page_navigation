@@ -1,7 +1,7 @@
 [project]
 name = "jw_page_navigation"
 description = "Jw Web Automation Helper package"
-version = "0.1.0"
+version = "0.1.2"
 authors = [
     { name = "Allofmex", email = "allofmex@web.de" }
 ]
