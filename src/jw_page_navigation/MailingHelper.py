@@ -40,3 +40,6 @@ class MailingHelper(PageNavigator):
     async def addAttachment(self, absFilePath: str) -> None:
         fileInput = self.navWait.until(ExpCond.presence_of_element_located((By.XPATH, '//input[contains(@type,"file")]')))
         fileInput.send_keys(absFilePath);
+
+    async def composeMail(self) -> None:
+        pass # for compatiblity to other mailer
