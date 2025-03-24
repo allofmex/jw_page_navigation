@@ -8,7 +8,6 @@ from selenium.webdriver.support import expected_conditions as ExpCond
 from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.firefox.service import Service
-# from selenium.webdriver.firefox import FirefoxOptions
 from selenium.webdriver.common.by import By
 
 class PageNavigator:

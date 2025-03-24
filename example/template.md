@@ -1,18 +1,18 @@
-Hallo John
+Hello John
 
-Im Anhang der Rechnungsbericht für #month.
+See attached report for #month.
 
-**Nächste Schritte**
+**Next steps**
 
-**Sekretär**:
+**Secretary**:
 
-* Rechnungsbericht prüfen
-* Kopie an Koordinator 
+* Check report
+* Forward to coordinator
 
 
-**Koordinator** 
+**Coordinator** 
 
-* veranlasst Bekanntmachung (Seite 2 vorlesen)
+* arrange announcement
 
-Vielen Dank
-Gruß
+Thank you very much
+

@@ -1,11 +1,7 @@
 #!/usr/bin/python3
 from typing import List
 
-# from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as ExpCond
-# from selenium import webdriver
-# from selenium.webdriver.firefox.options import Options
-# from selenium.webdriver.firefox.service import Service
 from selenium.webdriver.common.by import By
 
 from jw_page_navigation.PageNavigator import PageNavigator
